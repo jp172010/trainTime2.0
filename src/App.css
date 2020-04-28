@@ -36,3 +36,31 @@
     transform: rotate(360deg);
   }
 }
+#primeGrid{
+  background-color: lightblue;
+  padding-bottom: 100%;
+}
+.train{
+  border-top: solid;
+  border-radius: 25px;
+  padding-left: 5%;
+}
+.trainButton{
+  background-color: black;
+  color:white;
+  margin-top: 1%;
+  margin-right: 2%;
+  float: right;
+}
+#trainList {
+  background-color: white;
+  margin-left: 5%;
+  padding: 0;
+  border-style: solid;
+  border-radius: 25px;
+}
+#trainListTitle{
+  text-align: center;
+}
+
+
