@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import TrainModal from "./components/Modal";
+import Moment from "react-moment";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,42 +68,41 @@ function App() {
                 <MenuIcon />
               </IconButton>
               <Typography variant="h6" className={classes.title}>
-                News
+                Pratt International Train Station
               </Typography>
-              <Button color="inherit">Login</Button>
+              <Moment format="MMMM Do YYYY, h:mm:ss a" interval={1000}/>
             </Toolbar>
           </AppBar>
         </Grid>
       </Grid>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <TrainModal />
-        </Grid>
-      </Grid>
       <br />
       <Grid container spacing={3}>
+      <Grid item xs={3} />
         <Grid item xs={6} id="trainList">
           <h3 id="trainListTitle">Train Schedule</h3>
+          <TrainModal />
           {trains.map((item) => {
             return (
               <Grid item xs={12}>
                 <div key={item.id} className="train">
-                  <button
+                  <Button
+                    variant="contained"
+                    color="secondary"
                     className="trainButton"
                     onClick={() => removeItem(item.id)}
                   >
                     ×
-                  </button>
-                  <h3>
-                    {item.trainDestination}
-                  </h3>
-                  <p>{item.trainDepart} IN: {item.time} MINUTES</p>
+                  </Button>
+                  <h3>{item.trainDestination}</h3>
+                  <p>
+                    {item.trainDepart} IN: {item.time}
+                  </p>
                 </div>
               </Grid>
             );
           })}
         </Grid>
-        <Grid item xs={6} />
+        <Grid item xs={3} />
       </Grid>
     </div>
   );

@@ -1,6 +1,10 @@
 #modalButton{
+    margin-bottom: .5%;
     margin-left: .5%;
 }
 #modalClose{
-    margin-left: 95%;
+    float: right;
+}
+#addTrainButton{
+    margin-top: 4%;
 }

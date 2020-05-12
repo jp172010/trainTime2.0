@@ -44,12 +44,10 @@
   border-top: solid;
   border-radius: 25px;
   padding-left: 5%;
+  padding-right: 3%;
+  padding-top: 1%;
 }
 .trainButton{
-  background-color: black;
-  color:white;
-  margin-top: 1%;
-  margin-right: 2%;
   float: right;
 }
 #trainList {

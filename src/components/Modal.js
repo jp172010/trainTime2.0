@@ -4,6 +4,7 @@ import Modal from "@material-ui/core/Modal";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
+import Button from "@material-ui/core/Button";
 import firebase from "../firebase.js";
 import "./modal.css";
 
@@ -53,14 +54,80 @@ export default function TrainModal(props) {
   const [trainDepart, setTrainDepart] = useState("");
   const [firstTrain, setFirstTrain] = useState("");
 
-  const accountTypes = [
+  const trainTypes = [
     {
-      accountType: "Arriving",
+      trainType: "Arriving",
     },
     {
-      accountType: "Departing",
+      trainType: "Departing",
     },
   ];
+
+  const trainFrequency = [
+    {
+      frequency: "30 minutes"
+    },
+    {
+      frequency: "1 hour"
+    },
+    {
+      frequency: "2 hours"
+    },
+    {
+      frequency: "4 hours"
+    },
+    {
+      frequency: " 8 hours"
+    },
+    {
+      frequency: "16 hours"
+    },
+    {
+      frequency: "32 hours"
+    },
+  ]
+
+  const trainTimes = [
+    {
+      trainTime: "8:00 AM",
+    },
+    {
+      trainTime: "9:00 AM",
+    },
+    {
+      trainTime: "10:00 AM",
+    },
+    {
+      trainTime: "11:00 AM",
+    },
+    {
+      trainTime: "12:00 PM",
+    },
+    {
+      trainTime: "1:00 PM",
+    },
+    {
+      trainTime: "2:00 PM",
+    },
+    {
+      trainTime: "3:00 PM",
+    },
+    {
+      trainTime: "4:00 PM",
+    },
+    {
+      trainTime: "5:00 PM",
+    },
+    {
+      trainTime: "6:00 PM",
+    },
+    {
+      trainTime: "7:00 PM",
+    },
+    {
+      trainTime: "8:00 PM",
+    },
+  ]
 
   const handleOpen = () => {
     setOpen(true);
@@ -118,12 +185,26 @@ export default function TrainModal(props) {
           <h3 id="simple-modal-title">Add New Train</h3>
         </Grid>
         <Grid item xs={6}>
-          <button id="modalClose" onClick={handleClose}>
+          <Button
+            variant="contained"
+            color="secondary"
+            id="modalClose"
+            onClick={handleClose}
+          >
             ×
-          </button>
+          </Button>
         </Grid>
         <Grid item xs={12}>
-          <form onSubmit={handleSubmit}>
+          <form>
+          <TextField
+              id="firstInput"
+              type="text"
+              name="trainDestination"
+              value={inputValue}
+              placeholder="Destination?"
+              onChange={onChange}
+            />
+            <br />
             <TextField
               id="thirdInput"
               select
@@ -142,41 +223,66 @@ export default function TrainModal(props) {
               margin="normal"
               variant="filled"
             >
-              {accountTypes.map((option) => (
-                <MenuItem key={option.accountType} value={option.accountType}>
-                  {option.accountType}
+              {trainTypes.map((option) => (
+                <MenuItem key={option.trainType} value={option.trainType}>
+                  {option.trainType}
                 </MenuItem>
               ))}
             </TextField>
             <br />
             <TextField
-              id="firstInput"
-              type="text"
-              name="trainDestination"
-              value={inputValue}
-              placeholder="Destination?"
-              onChange={onChange}
-            />
-            <br />
-            <TextField
               id="secondInput"
+              select
               type="text"
+              label="Select"
               name="time"
+              className={classes.textField}
               value={secondInputValue}
-              placeholder="How often does it arrive?"
               onChange={onChange2}
-            />
+              SelectProps={{
+                MenuProps: {
+                  className: classes.menu,
+                },
+              }}
+              helperText="Frequency"
+              margin="normal"
+              variant="filled"
+            >
+              {trainFrequency.map((option) => (
+                <MenuItem key={option.frequency} value={option.frequency}>
+                  {option.frequency}
+                </MenuItem>
+              ))}
+            </TextField>
             <br />
             <TextField
               id="fourthInput"
+              select
               type="text"
+              label="Select"
               name="firstTrain"
+              className={classes.textField}
               value={fourthInputValue}
-              placeholder="Time of first train"
               onChange={onChange4}
-            />
+              SelectProps={{
+                MenuProps: {
+                  className: classes.menu,
+                },
+              }}
+              helperText="Time of first train"
+              margin="normal"
+              variant="filled"
+            >
+              {trainTimes.map((option) => (
+                <MenuItem key={option.trainTime} value={option.trainTime}>
+                  {option.trainTime}
+                </MenuItem>
+              ))}
+            </TextField>
             <br />
-            <button>Add Train</button>
+            <Button id="addTrainButton" variant="contained" color="secondary" onClick={handleSubmit}>
+              Add Train
+            </Button>
           </form>
         </Grid>
       </Grid>
@@ -187,9 +293,15 @@ export default function TrainModal(props) {
     <div>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <button id="modalButton" type="button" onClick={handleOpen}>
+          <Button
+            variant="contained"
+            color="primary"
+            id="modalButton"
+            type="button"
+            onClick={handleOpen}
+          >
             Add New Train
-          </button>
+          </Button>
           <Modal
             open={open}
             onClose={handleClose}
