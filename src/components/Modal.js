@@ -65,29 +65,53 @@ export default function TrainModal(props) {
 
   const trainFrequency = [
     {
-      frequency: "30 minutes"
+      frequency: "15",
     },
     {
-      frequency: "1 hour"
+      frequency: "30",
     },
     {
-      frequency: "2 hours"
+      frequency: "60",
     },
     {
-      frequency: "4 hours"
+      frequency: "120",
     },
     {
-      frequency: " 8 hours"
+      frequency: "360",
     },
     {
-      frequency: "16 hours"
+      frequency: "720",
     },
     {
-      frequency: "32 hours"
+      frequency: "1440",
     },
-  ]
+  ];
 
   const trainTimes = [
+    {
+      trainTime: "12:00 AM",
+    },
+    {
+      trainTime: "1:00 AM",
+    },
+    {
+      trainTime: "2:00 AM",
+    },
+    {
+      trainTime: "3:00 AM",
+    },
+    {
+      trainTime: "4:00 AM",
+    },
+    {
+      trainTime: "5:00 AM",
+    },
+    {
+      trainTime: "6:00 AM",
+    },
+    {
+      trainTime: "7:00 AM",
+    },
     {
       trainTime: "8:00 AM",
     },
@@ -127,7 +151,16 @@ export default function TrainModal(props) {
     {
       trainTime: "8:00 PM",
     },
-  ]
+    {
+      trainTime: "9:00 PM",
+    },
+    {
+      trainTime: "10:00 PM",
+    },
+    {
+      trainTime: "11:00 PM",
+    },
+  ];
 
   const handleOpen = () => {
     setOpen(true);
@@ -152,8 +185,6 @@ export default function TrainModal(props) {
     setThirdInputValue("");
     setFourthInputValue("");
     setTrainDestination("");
-    setTime("");
-    setTrainDepart("");
     handleClose();
   };
 
@@ -196,7 +227,7 @@ export default function TrainModal(props) {
         </Grid>
         <Grid item xs={12}>
           <form>
-          <TextField
+            <TextField
               id="firstInput"
               type="text"
               name="trainDestination"
@@ -280,7 +311,12 @@ export default function TrainModal(props) {
               ))}
             </TextField>
             <br />
-            <Button id="addTrainButton" variant="contained" color="secondary" onClick={handleSubmit}>
+            <Button
+              id="addTrainButton"
+              variant="contained"
+              color="secondary"
+              onClick={handleSubmit}
+            >
               Add Train
             </Button>
           </form>

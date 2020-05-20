@@ -11,6 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import TrainModal from "./components/Modal";
 import Moment from "react-moment";
+import moment from 'moment'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,12 +35,24 @@ function App() {
       let items = snapshot.val();
       let newState = [];
       for (let item in items) {
+        let fTrain = moment(items[item].firstTrain, "hh:mm a").format("X");
+        let fTrainMin = moment().diff(moment(fTrain, "X"), "minutes");
+        if (fTrainMin < 0) {
+          fTrainMin = fTrainMin * -1;
+        } else {
+          fTrainMin = fTrainMin * -1 + 1440;
+        }
+        let nextTrain = moment().add(fTrainMin, "minutes").format("LLL");
+        if(moment().diff(moment(nextTrain, "LLL"),"minutes")<= 0){
+          nextTrain = moment(nextTrain,"LLL").add(1440, "minutes").format("LLL")
+        }
         newState.push({
           id: item,
           time: items[item].time,
           trainDestination: items[item].trainDestination.toUpperCase(),
-          trainDepart: items[item].trainDepart.toUpperCase(),
-          firstTrain: items[item].firstTrain,
+          trainDepart: items[item].trainDepart,
+          firstTrain: fTrainMin,
+          nextTrain: nextTrain,
         });
       }
       console.log(newState);
@@ -70,14 +83,14 @@ function App() {
               <Typography variant="h6" className={classes.title}>
                 Pratt International Train Station
               </Typography>
-              <Moment format="MMMM Do YYYY, h:mm:ss a" interval={1000}/>
+              <Moment format="MMMM Do YYYY, h:mm:ss a" interval={1000} />
             </Toolbar>
           </AppBar>
         </Grid>
       </Grid>
       <br />
       <Grid container spacing={3}>
-      <Grid item xs={3} />
+        <Grid item xs={3} />
         <Grid item xs={6} id="trainList">
           <h3 id="trainListTitle">Train Schedule</h3>
           <TrainModal />
@@ -93,10 +106,11 @@ function App() {
                   >
                     ×
                   </Button>
-                  <h3>{item.trainDestination}</h3>
-                  <p>
-                    {item.trainDepart} IN: {item.time}
-                  </p>
+                  <h2>
+                    {item.trainDestination} ({item.trainDepart})
+                  </h2>
+                  <h4>{item.nextTrain}</h4>
+                  <p>IN: {item.firstTrain} Minutes</p>
                 </div>
               </Grid>
             );
