@@ -11,7 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import TrainModal from "./components/Modal";
 import Moment from "react-moment";
-import moment from 'moment'
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,8 +43,10 @@ function App() {
           fTrainMin = fTrainMin * -1 + 1440;
         }
         let nextTrain = moment().add(fTrainMin, "minutes").format("LLL");
-        if(moment().diff(moment(nextTrain, "LLL"),"minutes")<= 0){
-          nextTrain = moment(nextTrain,"LLL").add(1440, "minutes").format("LLL")
+        if (moment().diff(moment(nextTrain, "LLL"), "minutes") <= 0) {
+          nextTrain = moment(nextTrain, "LLL")
+            .add(1440, "minutes")
+            .format("LLL");
         }
         newState.push({
           id: item,
