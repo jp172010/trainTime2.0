@@ -331,7 +331,7 @@ export default function TrainModal(props) {
         <Grid item xs={12}>
           <Button
             variant="contained"
-            color="primary"
+            color="red"
             id="modalButton"
             type="button"
             onClick={handleOpen}

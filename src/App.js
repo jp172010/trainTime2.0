@@ -8,7 +8,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 import TrainModal from "./components/Modal";
 import Moment from "react-moment";
 import moment from "moment";
@@ -45,7 +44,7 @@ function App() {
         let nextTrain = moment().add(fTrainMin, "minutes").format("LLL");
         if (moment().diff(moment(nextTrain, "LLL"), "minutes") <= 0) {
           nextTrain = moment(nextTrain, "LLL")
-            .add(1440, "minutes")
+            .add(items[item].time, "minutes")
             .format("LLL");
         }
         newState.push({
@@ -80,7 +79,7 @@ function App() {
                 color="inherit"
                 aria-label="menu"
               >
-                <MenuIcon />
+                <TrainModal />
               </IconButton>
               <Typography variant="h6" className={classes.title}>
                 Pratt International Train Station
@@ -92,33 +91,58 @@ function App() {
       </Grid>
       <br />
       <Grid container spacing={3}>
-        <Grid item xs={3} />
         <Grid item xs={6} id="trainList">
-          <h3 id="trainListTitle">Train Schedule</h3>
-          <TrainModal />
+          <h2 id="trainListTitle">Arriving</h2>
           {trains.map((item) => {
-            return (
-              <Grid item xs={12}>
-                <div key={item.id} className="train">
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    className="trainButton"
-                    onClick={() => removeItem(item.id)}
-                  >
-                    ×
-                  </Button>
-                  <h2>
-                    {item.trainDestination} ({item.trainDepart})
-                  </h2>
-                  <h4>{item.nextTrain}</h4>
-                  <p>IN: {item.firstTrain} Minutes</p>
-                </div>
-              </Grid>
-            );
+            if (item.trainDepart == "Arriving") {
+              return (
+                <Grid item xs={12}>
+                  <div key={item.id} className="train">
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      className="trainButton"
+                      onClick={() => removeItem(item.id)}
+                    >
+                      ×
+                    </Button>
+                    <h2>
+                      {item.trainDestination} ({item.trainDepart})
+                    </h2>
+                    <h4>{item.nextTrain}</h4>
+                    <p>IN: {item.firstTrain} Minutes</p>
+                  </div>
+                </Grid>
+              );
+            }
           })}
         </Grid>
-        <Grid item xs={3} />
+        <Grid item xs={6} id="trainList2">
+          <h2 id="trainListTitle">Departing</h2>
+          {trains.map((item) => {
+            if (item.trainDepart == "Departing") {
+              return (
+                <Grid item xs={12}>
+                  <div key={item.id} className="train">
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      className="trainButton"
+                      onClick={() => removeItem(item.id)}
+                    >
+                      ×
+                    </Button>
+                    <h2>
+                      {item.trainDestination} ({item.trainDepart})
+                    </h2>
+                    <h4>{item.nextTrain}</h4>
+                    <p>IN: {item.firstTrain} Minutes</p>
+                  </div>
+                </Grid>
+              );
+            }
+          })}
+        </Grid>
       </Grid>
     </div>
   );

@@ -51,8 +51,15 @@
   float: right;
 }
 #trainList {
-  background-color: white;
-  margin-left: 5%;
+  color: yellow;
+  background-color: black;
+  padding: 0;
+  border-style: solid;
+  border-radius: 25px;
+}
+#trainList2 {
+  color: yellow;
+  background-color: black;
   padding: 0;
   border-style: solid;
   border-radius: 25px;
