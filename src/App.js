@@ -42,7 +42,7 @@ function App() {
           fTrainMin = fTrainMin * -1 + 1440;
         }
         let nextTrain = moment().add(fTrainMin, "minutes").format("LLL");
-        if (moment().diff(moment(nextTrain, "LLL"), "minutes") <= 0) {
+        if (moment(nextTrain, "LLL").diff(moment(), "minutes") <= 0) {
           nextTrain = moment(nextTrain, "LLL")
             .add(items[item].time, "minutes")
             .format("LLL");
